@@ -27,14 +27,10 @@ public class Statistics {
     public List<Player> team(String teamName) {
         ArrayList<Player> playersOfTeam = new ArrayList<Player>();
         
-        try{
         for (Player player : players) {
             if ( player.getTeam().equals(teamName)) {
                 playersOfTeam.add(player);
             }
-        }
-        } catch (Exception e){
-            System.out.print(e);
         }
         return playersOfTeam;
     }
