@@ -1,2 +1,0 @@
-this is a newfile.txt in the newfeature branch
-
