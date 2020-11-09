@@ -6,16 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Kirjanpito {
-//    private static Kirjanpito instance;
-//    
-//    public static Kirjanpito getInstance() {
-//        if ( instance==null) {
-//            instance = new Kirjanpito();
-//        }
-//        
-//        return instance;
-//    }
-//    
+
     private ArrayList<String> tapahtumat;
 
     public Kirjanpito() {

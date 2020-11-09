@@ -10,21 +10,7 @@ private VarastoInterface varasto;
     private Ostoskori ostoskori;
     private ViitegeneraattoriInterface viitegeneraattori;
     private String kaupanTili;
-//    private Varasto varasto;
-//    private Pankki pankki;
-//    private Ostoskori ostoskori;
-//    private Viitegeneraattori viitegeneraattori;
-//    private String kaupanTili;
-//
-//    public Kauppa() {
-//        varasto = Varasto.getInstance();
-//        pankki = Pankki.getInstance();
-//        viitegeneraattori = Viitegeneraattori.getInstance();
-//        kaupanTili = "33333-44455";
-//    }
-//    public Kauppa(){
-//        
-//    }
+
     @Autowired
     public Kauppa(VarastoInterface varasto,
     PankkiInterface pankki, 

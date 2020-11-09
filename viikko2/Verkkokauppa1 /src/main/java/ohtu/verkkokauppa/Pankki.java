@@ -6,16 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Pankki implements PankkiInterface {
 
-//    private static Pankki instanssi;
-//
-//    public static Pankki getInstance() {
-//        if (instanssi == null) {
-//            instanssi = new Pankki();
-//        }
-//
-//        return instanssi;
-//    }
-    
     public Kirjanpito kirjanpito;
     @Autowired
     public Pankki(Kirjanpito accounting) {

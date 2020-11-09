@@ -16,13 +16,7 @@ public class Main {
     Pankki pankki              = ctx.getBean(Pankki.class);
     
     Kauppa kauppa = ctx.getBean(Kauppa.class);
-//    Kauppa kauppa              = new Kauppa(varasto, pankki, viitegen);
-//        
-//    Kauppa kauppa = new Kauppa(
-//    Varasto.getInstance(), 
-//    Pankki.getInstance(), 
-//    Viitegeneraattori.getInstance() 
-//    );
+
         // kauppa hoitaa yhden asiakkaan kerrallaan seuraavaan tapaan:
         kauppa.aloitaAsiointi();
         kauppa.lisaaKoriin(1);

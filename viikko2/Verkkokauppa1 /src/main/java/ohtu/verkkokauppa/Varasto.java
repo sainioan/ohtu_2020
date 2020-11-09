@@ -7,15 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Varasto implements VarastoInterface {
 
-//    private static Varasto instanssi;
-//
-//    public static Varasto getInstance() {
-//        if (instanssi == null) {
-//            instanssi = new Varasto();
-//        }
-//
-//        return instanssi;
-//    }
     
     public Kirjanpito kirjanpito;
     public HashMap<Tuote, Integer> saldot;  
