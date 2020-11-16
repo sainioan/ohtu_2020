@@ -85,6 +85,11 @@ public class Stepdefs {
         signUpWith(username, password, password);
     }
 
+    @When("a username {string} and password {string} and non-matching password confirmation are entered")
+    public void aValidUserNameAndPassWordNonMatching(String username, String password){
+        signUpWith(username, password, password + "aaa");
+    }
+
     @Then("a new user is created")
     public void aNewUserIsCreated(){
         pageHasContent("Welcome to Ohtu Application!");
