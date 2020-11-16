@@ -69,6 +69,14 @@ public class Stepdefs {
         signUpWith(username, password, password);
     }  
 
+    @Given("user with username {string} and password {string} is tried to be created")
+    public void userWithUsernameWithPassWordIsTriedToBeCreated(String username, String password) {
+        driver.get(baseUrl);
+        WebElement element = driver.findElement(By.linkText("register new user"));       
+        element.click();   
+        signUpWith(username, password, password);
+    }  
+
     @When("a valid username {string} and password {string} and matching password confirmation are entered")
     public void aValidUsernameAndPasswordAndMatchingPasswordConfirmationAreEntered(String username, String password){
         signUpWith(username, password, password);
