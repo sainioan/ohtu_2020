@@ -24,5 +24,5 @@ Feature: A new user account can be created if a proper unused username and passw
 	
 Scenario: creation fails with valid username and password long enough but consisting of only letters
         Given command new is selected
-        When  username "LaylaPie" and password "xxx111" are entered
+        When  username "LaylaPie" and password "xxxaaaaaaa" are entered
         Then  system will respond with "new user not registered"
