@@ -75,10 +75,30 @@ public class Stepdefs {
         signUpWith(username, password, password);
     }
 
+    @When("too short username {string} and correct password {string} and matching password confirmation are entered")
+    public void tooShortUsernameAndCorrectPasswordAreEntered(String username, String password) {
+        signUpWith(username, password, password);
+    }
+
+    @When("a valid username {string} and too short password {string} and matching password confirmation are entered")
+    public void aValidUsernameAndTooShortPassword(String username, String password) {
+        signUpWith(username, password, password);
+    }
+
     @Then("a new user is created")
     public void aNewUserIsCreated(){
         pageHasContent("Welcome to Ohtu Application!");
     }
+
+    @Then("user is not created and error {string} is reported")
+    public void userIsNotCreatedAndErrorIsReported(String string) {
+        pageHasContent(string);
+    }
+
+    // @Then("user is not created and error {string} is reported")
+    // public void newUserIsNotCreatedPasswordTooShort() {
+    //     pageHasContent("password should have at least 8 characters");
+    // }
     
     @After
     public void tearDown(){

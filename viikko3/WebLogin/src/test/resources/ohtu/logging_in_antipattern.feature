@@ -10,8 +10,4 @@ Feature: As a registered user can log in with valid username/password-combinatio
         When username "jukka" and password "wrong" are given
         Then system will respond "invalid username or password"
 
-    Scenario: a nonexistent user can not login 
-        Given login is selected
-        When username "bogus" and password "bogus2" are given 
-        Then user is not logged in and error message is given
 
