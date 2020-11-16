@@ -2,14 +2,13 @@ package ohtu;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import static org.junit.Assert.*;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import static org.junit.Assert.*;
 
 public class Stepdefs {
     //WebDriver driver = new ChromeDriver();
@@ -55,7 +54,7 @@ public class Stepdefs {
     }
 
     @Given("command new user is selected")
-    public void commandNewNewUserIsSelected() {
+    public void commandNewUserIsSelected() {
         driver.get(baseUrl);
         WebElement element = driver.findElement(By.linkText("register new user"));       
         element.click();   
@@ -100,10 +99,12 @@ public class Stepdefs {
         pageHasContent(string);
     }
 
-    // @Then("user is not created and error {string} is reported")
-    // public void newUserIsNotCreatedPasswordTooShort() {
-    //     pageHasContent("password should have at least 8 characters");
-    // }
+    @Given("user with username {string} with password {string} is successfully created")
+    public void userWithUsernameWithPasswordIsSuccessfullyCreated(String username, String password) {
+        commandNewUserIsSelected();
+        signUpWith(username, password, password);
+        pageHasContent("Welcome to Ohtu Application!");
+    }
     
     @After
     public void tearDown(){
