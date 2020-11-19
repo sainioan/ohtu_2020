@@ -38,59 +38,6 @@ public class KauppaTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of aloitaAsiointi method, of class Kauppa.
-     */
-//    @Test
-//    public void testAloitaAsiointi() {
-//        System.out.println("aloitaAsiointi");
-//        Kauppa instance = null;
-//        instance.aloitaAsiointi();
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of poistaKorista method, of class Kauppa.
-//     */
-//    @Test
-//    public void testPoistaKorista() {
-//        System.out.println("poistaKorista");
-//        int id = 0;
-//        Kauppa instance = null;
-//        instance.poistaKorista(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of lisaaKoriin method, of class Kauppa.
-//     */
-//    @Test
-//    public void testLisaaKoriin() {
-//        System.out.println("lisaaKoriin");
-//        int id = 0;
-//        Kauppa instance = null;
-//        instance.lisaaKoriin(id);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of tilimaksu method, of class Kauppa.
-//     */
-//    @Test
-//    public void testTilimaksu() {
-//        System.out.println("tilimaksu");
-//        String nimi = "";
-//        String tiliNumero = "";
-//        Kauppa instance = null;
-//        boolean expResult = false;
-//        boolean result = instance.tilimaksu(nimi, tiliNumero);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
     @Test
     public void ostoksenPaaytyttyaPankinMetodiaTilisiirtoKutsutaan() {
         // luodaan ensin mock-oliot
@@ -115,7 +62,39 @@ public class KauppaTest {
 
         // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
         verify(pankki).tilisiirto("pekka", 42, "12345", "33333-44455",5);   
-        // toistaiseksi ei välitetty kutsussa käytetyistä parametreista
+
     }
     
+        @Test
+    public void ostoksenPaaytyttyaPankinMetodiaTilisiirtoKutsutaan2() {
+        // luodaan ensin mock-oliot
+        Pankki pankki = mock(Pankki.class);
+
+        Viitegeneraattori viite = mock(Viitegeneraattori.class);
+        // määritellään että viitegeneraattori palauttaa viitten 42
+        when(viite.uusi()).thenReturn(43);
+
+        Varasto varasto = mock(Varasto.class);
+        // määritellään että tuote numero 1 on maito jonka hinta on 5 ja saldo 10
+        when(varasto.saldo(2)).thenReturn(10); 
+        when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "banaani", 2));
+        when(varasto.saldo(3)).thenReturn(10); 
+        when(varasto.haeTuote(3)).thenReturn(new Tuote(3, "kahvi", 4));
+
+        // sitten testattava kauppa 
+        Kauppa k = new Kauppa(varasto, pankki, viite);              
+
+        // tehdään ostokset
+        k.aloitaAsiointi();
+        k.lisaaKoriin(2); 
+        k.lisaaKoriin(3); 
+        // ostetaan tuotetta numero 1 eli maitoa
+        k.tilimaksu("oliver", "55555");
+
+        // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
+        verify(pankki).tilisiirto("oliver", 43, "55555", "33333-44455",6);   
+
+    }
+    
+
 }
