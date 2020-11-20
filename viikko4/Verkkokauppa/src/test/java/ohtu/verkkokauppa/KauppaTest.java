@@ -58,7 +58,7 @@ public class KauppaTest {
         verify(pankki).tilisiirto(eq("pekka"), eq(42), eq("12345"), eq("33333-44455"), eq(5));
     }
     
-        @Test
+    @Test
     public void ostoksenPaaytyttyaPankinMetodiaTilisiirtoKutsutaan2() {
        
         when(viite.uusi()).thenReturn(43);
@@ -79,6 +79,52 @@ public class KauppaTest {
 
         // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
         verify(pankki).tilisiirto(eq("oliver"), eq(43), eq("55555"), eq("33333-44455"),eq(6));   
+
+    }
+    
+    @Test
+    public void ostoksenPaaytyttyaPankinMetodiaTilisiirtoKutsutaan3() {
+       
+        when(viite.uusi()).thenReturn(44);
+        when(varasto.saldo(2)).thenReturn(10); 
+        when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "banaani", 2));
+        when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "banaani", 2));
+
+        // sitten testattava kauppa 
+        Kauppa k = new Kauppa(varasto, pankki, viite);              
+
+        // tehdään ostokset
+        k.aloitaAsiointi();
+        k.lisaaKoriin(2); 
+        k.lisaaKoriin(2); 
+        // ostetaan tuotetta numero 1 eli maitoa
+        k.tilimaksu("oliver", "55555");
+
+        // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
+        verify(pankki).tilisiirto(eq("oliver"), eq(44), eq("55555"), eq("33333-44455"),eq(4));   
+
+    }
+    
+    public void ostoksenPaaytyttyaPankinMetodiaTilisiirtoKutsutaan4() {
+       
+        when(viite.uusi()).thenReturn(45);
+        when(varasto.saldo(2)).thenReturn(10); 
+        when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "banaani", 2));
+        when(varasto.saldo(4)).thenReturn(0); 
+        when(varasto.haeTuote(4)).thenReturn(new Tuote(4, "kello", 150));
+
+        // sitten testattava kauppa 
+        Kauppa k = new Kauppa(varasto, pankki, viite);              
+
+        // tehdään ostokset
+        k.aloitaAsiointi();
+        k.lisaaKoriin(2); 
+        k.lisaaKoriin(4); 
+        // ostetaan tuotetta numero 1 eli maitoa
+        k.tilimaksu("oliver", "55555");
+
+        // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
+        verify(pankki).tilisiirto(eq("oliver"), eq(45), eq("55555"), eq("33333-44455"),eq(2));   
 
     }
     
