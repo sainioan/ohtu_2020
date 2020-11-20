@@ -124,8 +124,48 @@ public class KauppaTest {
         k.tilimaksu("oliver", "55555");
 
         // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
-        verify(pankki).tilisiirto(eq("oliver"), eq(45), eq("55555"), eq("33333-44455"),eq(2));   
+        verify(pankki).tilisiirto(eq("oliver"), eq(45), eq("55555"), eq("33333-44455"),eq(2));  
+        k.aloitaAsiointi();
+        
+        verify(pankki).tilisiirto(eq("oliver"), anyInt(), eq("55555"), eq("33333-44455"),eq(0));  
+        
+    }
+    @Test
+    public void kaytetaanPerakkaistenViitekutsujenArvoja() {
+       
+        // määritellään että metodi palauttaa ensimmäisellä kutsukerralla 1, toisella 2 
+        // ja kolmannella 3
+        when(viite.uusi()).thenReturn(46)
+            .thenReturn(47)
+            .thenReturn(48);
+        
+        when(varasto.saldo(2)).thenReturn(10); 
+        when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "banaani", 2));
+        Kauppa k = new Kauppa(varasto, pankki, viite);   
+        k.aloitaAsiointi();;
+        k.lisaaKoriin(2); 
+        k.tilimaksu("oliver", "55555");
 
+        // varmistetaan, että nyt käytössä ensimmäisenä pyydetty viite
+        verify(pankki).tilisiirto(anyString(), eq(46), eq("55555"),eq("33333-44455"), eq(2));
+        
+        when(varasto.saldo(1)).thenReturn(10); 
+        when(varasto.haeTuote(1)).thenReturn(new Tuote(1, "maito", 5));
+        k.aloitaAsiointi();;;
+        k.lisaaKoriin(1); 
+        k.tilimaksu("oliver", "55555");
+
+        // ... toisena pyydetty viite
+        verify(pankki).tilisiirto(anyString(), eq(47), eq("55555"),eq("33333-44455"), eq(5));
+        
+        when(varasto.saldo(10)).thenReturn(0); 
+        when(varasto.haeTuote(10)).thenReturn(new Tuote(10, "kaakao", 4));
+        k.aloitaAsiointi();;;
+        k.lisaaKoriin(10); 
+        k.tilimaksu("oliver", "55555");
+
+        // ... ja kolmantena pyydetty viite        
+        verify(pankki).tilisiirto(anyString(), eq(48), eq("55555"),eq("33333-44455"), eq(0));
     }
     
 
