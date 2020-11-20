@@ -167,6 +167,29 @@ public class KauppaTest {
         // ... ja kolmantena pyydetty viite        
         verify(pankki).tilisiirto(anyString(), eq(48), eq("55555"),eq("33333-44455"), eq(0));
     }
+    @Test
+    public void ostoksenPaaytyttyaPankinMetodiaTilisiirtoKutsutaan5() {
+       
+        when(viite.uusi()).thenReturn(49);
+        when(varasto.saldo(2)).thenReturn(10); 
+        when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "banaani", 2));
+        when(varasto.saldo(3)).thenReturn(10); 
+        when(varasto.haeTuote(3)).thenReturn(new Tuote(3, "kahvi", 4));
+
+        // sitten testattava kauppa 
+        Kauppa k = new Kauppa(varasto, pankki, viite);              
+
+        // tehdään ostokset
+        k.aloitaAsiointi();
+        k.lisaaKoriin(2); 
+        k.lisaaKoriin(3); 
+        k.poistaKorista(2);
+        k.tilimaksu("oliver", "55555");
+
+        // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
+        verify(pankki).tilisiirto(eq("oliver"), eq(49), eq("55555"), eq("33333-44455"),eq(4));   
+
+    }
     
 
 }
