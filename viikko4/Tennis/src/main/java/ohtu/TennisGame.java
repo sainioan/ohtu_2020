@@ -43,9 +43,10 @@ public class TennisGame {
         }
 
     }
-    public void nonEvenScore(){
-         int tempScore = 0;
-                    for (int i = 1; i < 3; i++) {
+
+    public void nonEvenScore() {
+        int tempScore = 0;
+        for (int i = 1; i < 3; i++) {
             if (i == 1) {
                 tempScore = player1Score;
             } else {
@@ -68,8 +69,9 @@ public class TennisGame {
             }
         }
     }
-    public void scoreAboveForty(){
-                    int scoreDifference = player1Score - player2Score;
+
+    public void scoreAboveForty() {
+        int scoreDifference = player1Score - player2Score;
         if (scoreDifference == 1) {
             score = "Advantage player1";
         } else if (scoreDifference == -1) {
@@ -80,35 +82,18 @@ public class TennisGame {
             score = "Win for player2";
         }
     }
+
     public String getScore() {
 
-       
         if (player1Score == player2Score) {
             evenScore();
-        }
-    
-    else if (player1Score >=4 || player2Score >=4){
-        scoreAboveForty();
-//            int scoreDifference = player1Score - player2Score;
-//        if (scoreDifference == 1) {
-//            score = "Advantage player1";
-//        } else if (scoreDifference == -1) {
-//            score = "Advantage player2";
-//        } else if (scoreDifference >= 2) {
-//            score = "Win for player1";
-//        } else {
-//            score = "Win for player2";
-//        }
-    }
-
-    
-        else
-        {
-           
+        } else if (player1Score >= 4 || player2Score >= 4) {
+            scoreAboveForty();
+        } else {
             nonEvenScore();
 
+        }
+        return score;
     }
-    return score ;
-}
 
 }
