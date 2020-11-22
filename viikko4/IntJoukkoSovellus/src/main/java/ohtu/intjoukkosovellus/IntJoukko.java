@@ -130,13 +130,13 @@ public class IntJoukko {
         }
         return taulu;
     }
-       public static IntJoukko yhdiste(IntJoukko joukkoA, IntJoukko joukkoB) {
+       public static IntJoukko yhdiste(IntJoukko a, IntJoukko b) {
         IntJoukko yhdiste = new IntJoukko();
-        for (int i = 0; i < joukkoA.alkioidenLkm; i++) {
-            yhdiste.lisaa(joukkoA.lukujonoTaulukko[i]);
+        for (int i = 0; i < a.alkioidenLkm; i++) {
+            yhdiste.lisaa(a.lukujonoTaulukko[i]);
         }
-        for (int i = 0; i < joukkoB.alkioidenLkm; i++) {
-            yhdiste.lisaa(joukkoB.lukujonoTaulukko[i]);
+        for (int i = 0; i < b.alkioidenLkm; i++) {
+            yhdiste.lisaa(b.lukujonoTaulukko[i]);
         }
         return yhdiste;
     }
