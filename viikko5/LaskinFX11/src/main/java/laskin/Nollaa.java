@@ -13,21 +13,10 @@ import javafx.scene.control.TextField;
  * @author anniinasainio
  */
 public class Nollaa extends Komento {
-//
-//    TextField tuloskentta;
-//    TextField syotekentta;
-//    Button nollaa;
-//    Button undo;
-//    Sovelluslogiikka logiikka;
 
     private int aikaisempiArvo;
-
+    private int aikaisempiTulos;
     public Nollaa(TextField tuloskentta, TextField syotekentta, Button nollaa, Button undo, Sovelluslogiikka logiikka) {
-//        this.tuloskentta = tuloskentta;
-//        this.syotekentta = syotekentta;
-//        this.nollaa = nollaa;
-//        this.undo = undo;
-//        this.logiikka = logiikka;
 
         super(tuloskentta, syotekentta, nollaa, undo, logiikka);
     }
@@ -35,14 +24,14 @@ public class Nollaa extends Komento {
     @Override
     public void suorita() {
         int syote;
-        try{
-        this.aikaisempiArvo = Integer.valueOf(syotekentta.getText());
-        syote =  Integer.valueOf(syotekentta.getText());
-        } catch (Exception e){
+        try {
+            this.aikaisempiArvo = Integer.valueOf(tuloskentta.getText());
+            syote = Integer.valueOf(syotekentta.getText());
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         logiikka.nollaa();
-        tuloskentta.setText("" + logiikka.tulos());
+        tuloskentta.setText("" + logiikka.getTulos());
         syotekentta.clear();
         nollaa.disableProperty().set(true);
         undo.disableProperty().set(false);
@@ -51,6 +40,8 @@ public class Nollaa extends Komento {
     @Override
     public void peru() {
 
+        logiikka.setTulos(aikaisempiArvo);
+        tuloskentta.setText("" + aikaisempiArvo);
     }
 
 }

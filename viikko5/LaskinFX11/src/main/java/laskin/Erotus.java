@@ -35,28 +35,25 @@ public class Erotus extends Komento {
     public void suorita() {
         int syote;
         try {
-            this.aikaisempiArvo = Integer.valueOf(syotekentta.getText());
+            this.aikaisempiArvo = Integer.valueOf(tuloskentta.getText());
             syote = Integer.valueOf(syotekentta.getText());
             logiikka.miinus(syote);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
+        tuloskentta.setText("" + logiikka.getTulos());
+        syotekentta.clear();
+        nollaa.disableProperty().set(false);
+        undo.disableProperty().set(false);
 
-            tuloskentta.setText("" + logiikka.tulos());
-            syotekentta.clear();
-            nollaa.disableProperty().set(false);
-            undo.disableProperty().set(false);
+    }
 
-        }
+    @Override
+    public void peru() {
 
-        @Override
-        public void peru
-        
-        
-    
-
-() {
+        logiikka.setTulos(aikaisempiArvo);
+        tuloskentta.setText("" + aikaisempiArvo);
 
     }
 

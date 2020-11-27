@@ -53,7 +53,7 @@ public class Tapahtumankuuntelija implements EventHandler {
 //            System.out.println("undo pressed");
 //        }
 //
-//        int laskunTulos = sovellus.tulos();
+//        int laskunTulos = sovellus.getTulos();
 //
 //        syotekentta.setText("");
 //        tuloskentta.setText("" + laskunTulos);

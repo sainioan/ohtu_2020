@@ -2,7 +2,7 @@ package laskin;
 
 public class Sovelluslogiikka {
  
-    private int tulos;
+    public int tulos;
  
     public void plus(int luku) {
         tulos += luku;
@@ -16,7 +16,12 @@ public class Sovelluslogiikka {
         tulos = 0;
     }
  
-    public int tulos() {
+    public int getTulos() {
         return tulos;
     }
+    
+    public void setTulos(int tulos){
+        this.tulos = tulos;
+    }
+    
 }

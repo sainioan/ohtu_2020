@@ -4,6 +4,9 @@ plugins {
     id 'application'
 }
 
+apply plugin: 'java'
+apply plugin: 'application'
+
 application {
     mainClass = 'laskin.Main'
 }
@@ -15,6 +18,7 @@ javafx {
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 dependencies {

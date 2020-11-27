@@ -15,35 +15,37 @@ import javafx.scene.control.TextField;
 public class Summa extends Komento {
 
     private int aikaisempiArvo;
+
     public Summa(TextField tuloskentta, TextField syotekentta, Button nollaa, Button undo, Sovelluslogiikka logiikka) {
 //        this.tuloskentta = tuloskentta;
 //        this.syotekentta = syotekentta;
 //        this.nollaa = nollaa;
 //        this.undo = undo;
 //        this.logiikka = logiikka;
-     super(tuloskentta, syotekentta, nollaa, undo, logiikka);
+        super(tuloskentta, syotekentta, nollaa, undo, logiikka);
     }
-    
+
     @Override
     public void suorita() {
         int syote;
         try {
-        this.aikaisempiArvo = Integer.valueOf(syotekentta.getText());
-        syote = Integer.valueOf(syotekentta.getText());
-        logiikka.plus(syote);
+            this.aikaisempiArvo = Integer.valueOf(tuloskentta.getText());
+            syote = Integer.valueOf(syotekentta.getText());
+            logiikka.plus(syote);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        tuloskentta.setText("" + logiikka.tulos());
+        tuloskentta.setText("" + logiikka.getTulos());
         syotekentta.clear();
         nollaa.disableProperty().set(false);
         undo.disableProperty().set(false);
-        
 
     }
-    
+
     @Override
     public void peru() {
+        logiikka.setTulos(aikaisempiArvo);
+        tuloskentta.setText("" + aikaisempiArvo);
 
     }
 }
