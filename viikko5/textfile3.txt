@@ -1,2 +1,0 @@
-This is a third textfile
-This is an exercise for week 5.
