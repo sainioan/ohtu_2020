@@ -1,24 +1,26 @@
 package statistics.matcher;
+
 import statistics.Player;
 import statistics.matcher.HasAtLeast;
 
 public class Or implements Matcher {
- //   Matcher matcher;
-    HasAtLeast first;
-    HasAtLeast second;
+    //   Matcher matcher;
+
+    private Matcher[] matchers;
     
-    public Or(HasAtLeast first, HasAtLeast second){
-   //     this.matcher = matcher;
-        this.first = first;
-        this.second = second;
+    public Or(Matcher... m){
+        this.matchers = m;
     }
-    
+
+
     @Override
     public boolean matches(Player p) {
-
-        if(first.matches(p) || second.matches(p)) {
-        return true;
+          for (Matcher matcher : matchers) {
+            if (matcher.matches(p)) {
+                return true;
+            }
         }
+
         return false;
     }
 }
