@@ -6,6 +6,10 @@ public class Not implements Matcher {
 
     Matcher matcher;
 
+    public Not() {
+
+    }
+
     public Not(Matcher matcher) {
         this.matcher = matcher;
     }
