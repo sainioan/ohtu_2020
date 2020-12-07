@@ -1,5 +1,4 @@
 package statistics;
-
 import statistics.matcher.*;
 
 public class QueryBuilder {
